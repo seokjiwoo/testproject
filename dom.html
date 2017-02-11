@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>DOM.js</title>
+</head>
+<body>
+	<div>test</div>
+
+	<script>
+		(function(win){
+			var global = win;
+			var doc = global.document;
+
+			var dom = function(params, context){
+				return new GetOrMakeDom(params, context);
+			};
+
+			var regXContainsTag = /^\s*<(\w+|!)[^>]*>/;
+
+			var GetOrMakeDom = function(params, context){
+
+				var currentContext = doc;
+
+				if(context){
+					if(context.nodeType){
+						currentContext = context;
+					}else{
+						currentContext = doc.querySelector(context);
+					}
+				}
+
+			};
+			console.dir( regXContainsTag )
+			global.dom = dom;
+			dom.fn = GetOrMakeDom.prototype;
+
+		})(window);
+
+		dom("", document.querySelector("div"));
+		
+	</script>
+</body>
+</html>
